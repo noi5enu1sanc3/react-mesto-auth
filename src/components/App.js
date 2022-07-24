@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -10,6 +11,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import LikedByPopup from "./LikedByPopup";
+import ProtectedRoute from "./ProtectedRoute"
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -162,65 +164,63 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Main
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={hadleCardDeleteClick}
-          onShowLikedBy={handleCardLikeCounterClick}
-        />
-        <Footer />
-
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onOverlay={handleOverlayClick}
-          onUpdateUser={handleUpdateUser}
-          isLoading={isLoading}
-        />
-
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onOverlay={handleOverlayClick}
-          onAddPlace={handleAddPlaceSubmit}
-          isLoading={isLoading}
-        />
-
-        <ConfirmationPopup 
-          isOpen={selectedCard !== null ? selectedCard.isConfirmationPopupOpen : ""}
-          onClose={closeAllPopups}
-          onOverlay={handleOverlayClick}
-          onCardDelete={handleCardDelete}
-          cardId={selectedCard !== null ? selectedCard.id : ""}
-          isLoading={isLoading}
-        />
-
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onOverlay={handleOverlayClick}
-          onUpdateAvatar={handleUpdateAvatar}
-          isLoading={isLoading}
-        />
-
-        <ImagePopup
-          name={selectedCard !== null ? selectedCard.name : ""}
-          link={selectedCard !== null ? selectedCard.link : ""}
-          isOpen={selectedCard !== null ? selectedCard.isImagePopupOpen : ""}
-          onClose={closeAllPopups}
-          onOverlay={handleOverlayClick}
-        />
-
-        <LikedByPopup
-          isOpen={selectedCard !== null ? selectedCard.isLikedByPopupOpen : ""}
-          onClose={closeAllPopups}
-          likes={selectedCard !== null ? selectedCard.likes : ""}
-          onOverlay={handleOverlayClick}
-        />
+        <Switch>
+          <ProtectedRoute
+            exact path="/"
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={hadleCardDeleteClick}
+            onShowLikedBy={handleCardLikeCounterClick}
+          />
+          </Switch>
+          <Footer />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+            onUpdateUser={handleUpdateUser}
+            isLoading={isLoading}
+          />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+            onAddPlace={handleAddPlaceSubmit}
+            isLoading={isLoading}
+          />
+          <ConfirmationPopup
+            isOpen={selectedCard !== null ? selectedCard.isConfirmationPopupOpen : ""}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+            onCardDelete={handleCardDelete}
+            cardId={selectedCard !== null ? selectedCard.id : ""}
+            isLoading={isLoading}
+          />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+            onUpdateAvatar={handleUpdateAvatar}
+            isLoading={isLoading}
+          />
+          <ImagePopup
+            name={selectedCard !== null ? selectedCard.name : ""}
+            link={selectedCard !== null ? selectedCard.link : ""}
+            isOpen={selectedCard !== null ? selectedCard.isImagePopupOpen : ""}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+          />
+          <LikedByPopup
+            isOpen={selectedCard !== null ? selectedCard.isLikedByPopupOpen : ""}
+            onClose={closeAllPopups}
+            likes={selectedCard !== null ? selectedCard.likes : ""}
+            onOverlay={handleOverlayClick}
+          />
       </div>
     </CurrentUserContext.Provider>
   );
