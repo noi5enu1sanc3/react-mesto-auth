@@ -58,3 +58,14 @@
 @import url(./blocks/popup/__likes-user/popup__likes-user.css);
 @import url(./blocks/popup/__likes-name/popup__likes-name.css);
 @import url(./blocks/popup/__liked-by-container/popup__liked-by-container.css);
+
+@import url(./blocks/auth/__container/auth__container.css);
+@import url(./blocks/auth/__form/auth__form.css);
+@import url(./blocks/auth/__heading/auth__heading.css);
+@import url(./blocks/auth/__input-error-container/auth__input-error-container.css);
+@import url(./blocks/auth/__input-error/auth__input-error.css);
+@import url(./blocks/auth/__input/auth__input.css);
+@import url(./blocks/auth/__save-btn/auth__save-btn.css);
+@import url(./blocks/auth/__save-btn/auth__save-btn_disabled.css);
+@import url(./blocks/auth/__to-login-link/auth__to-login-link.css);
+@import url(./blocks/auth/__to-login-text/auth__to-login-text.css);

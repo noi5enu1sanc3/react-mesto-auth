@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -12,6 +12,8 @@ import api from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import LikedByPopup from "./LikedByPopup";
 import ProtectedRoute from "./ProtectedRoute"
+import Login from "./Login";
+import Register from "./Register";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -177,6 +179,12 @@ function App() {
             onCardDelete={hadleCardDeleteClick}
             onShowLikedBy={handleCardLikeCounterClick}
           />
+          <Route path="/sign-in">
+            <Login />
+          </Route>
+          <Route path="/sign-up">
+            <Register />
+          </Route>
           </Switch>
           <Footer />
           <EditProfilePopup

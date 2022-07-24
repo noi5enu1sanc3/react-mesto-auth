@@ -1,0 +1,10 @@
+.auth__container {
+  margin: auto;
+  color: #fff;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 358px;
+  padding-top: 60px;
+}
