@@ -8,3 +8,13 @@
   font-weight: 400;
   cursor: default;
 }
+
+@media screen and (max-width: 600px) {
+  .header__link-container {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    order: 2;
+  }
+}

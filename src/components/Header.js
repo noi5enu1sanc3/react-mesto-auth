@@ -4,6 +4,10 @@ import { Route, Link } from "react-router-dom";
 function Header({ userEmail, onLogOut }) {
   return (
     <header className="header">
+      <input className="burger-menu__toggle" id="burger-menu__toggle" type="checkbox"></input>
+      <label for="burger-menu__toggle" className="burger-menu__elements">
+        <span className="burger-menu__element"></span>
+      </label>
       <img src={logo} alt="логотип проекта Место" className="header__logo" />
       <div className="header__link-container">
         <Route path="/sign-in">

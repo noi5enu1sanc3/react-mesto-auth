@@ -61,11 +61,8 @@ function App() {
       }
     })
     .then(res => {
-      console.log(res)
       if(res.token) {
-        console.log('token found')
         setIsLoggedIn(true);
-        console.log(isLoggedIn);
         history.push("./");
       }
     })
@@ -74,24 +71,19 @@ function App() {
   }
 
   const handleLogout = () => {
-    console.log('to logout');
     localStorage.removeItem('token');
+    setIsLoggedIn(false);
     history.push('/sign-in');
   }
 
   const handleTokenCheck = () => {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      console.log(token)
       auth.getContent(token)
       .then(res => {
         if(res) {
-
-          console.log(res.data.email);
           setIsLoggedIn(true);
-          console.log(isLoggedIn);
           setUserEmail(res.data.email);
-          console.log(userEmail);
           history.push("./")
         }
       })
@@ -123,18 +115,18 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(isLoggedIn)
     handleTokenCheck();
-    api.getUserInfo()
-    .then(res => setCurrentUser(res))
-    .catch((err) => console.log(`Возникла ошибка: ${err}`));
-    api.getInitialCards()
-    .then((res) => {
-      setCards(res);
-    })
-    .catch((err) => console.log(`Возникла ошибка: ${err}`));
-  }, [isLoggedIn]
-  )
+    if (isLoggedIn) {
+      api.getUserInfo()
+      .then(res => setCurrentUser(res))
+      .catch((err) => console.log(`Возникла ошибка: ${err}`));
+      api.getInitialCards()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch((err) => console.log(`Возникла ошибка: ${err}`));
+    }
+  }, [isLoggedIn])
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
