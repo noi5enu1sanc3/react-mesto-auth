@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+import { Switch, Route, useHistory, withRouter } from "react-router-dom";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import ProtectedRoute from "./ProtectedRoute"
+import Login from "./Login";
+import Register from "./Register";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -8,15 +12,85 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import api from "../utils/Api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import LikedByPopup from "./LikedByPopup";
-import ProtectedRoute from "./ProtectedRoute"
-import Login from "./Login";
-import Register from "./Register";
+import api from "../utils/Api";
+import Auth from "../utils/Auth";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false);
+
+  const history = useHistory();
+
+  const auth = new Auth();
+
+  const handleRegister = ({ password, email }) => {
+    setIsLoading(true)
+    auth.register({ password, email })
+    .then(res => {
+      history.push('./sign-in');
+      setIsRegistrationSuccessful(true);
+      setIsInfoToolTipOpen(true);
+    })
+    .catch(err => {
+      console.log(err);
+      setIsRegistrationSuccessful(false);
+      setIsInfoToolTipOpen(true);
+    })
+    .finally(() => setIsLoading(false))
+  }
+
+  const handleLogin = ({ password, email }) => {
+    if (!password || !email) {
+      return;
+    }
+    setIsLoading(true)
+    auth.authorize({ password, email })
+    .then((res) => {
+      if (res.token) {
+        localStorage.setItem('token', res.token);
+        return res;
+      } else {
+        return
+      }
+    })
+    .then(res => {
+      console.log(res)
+      if(res.token) {
+        console.log('token found')
+        setIsLoggedIn(true);
+        console.log(isLoggedIn);
+        history.push("./");
+      }
+    })
+    .catch(err => console.log(err))
+    .finally(() => setIsLoading(false))
+  }
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      console.log(token)
+      auth.getContent(token)
+      .then(res => {
+        if(res) {
+
+          console.log(res.data.email);
+          setIsLoggedIn(true);
+          console.log(isLoggedIn);
+          setUserEmail(res.data.email);
+          console.log(userEmail);
+          history.push("./")
+        }
+      })
+    }
+  }
 
   const [cards, setCards] = useState([]);
 
@@ -43,18 +117,17 @@ function App() {
   }
 
   useEffect(() => {
+    console.log(isLoggedIn)
+    handleTokenCheck();
+    api.getUserInfo()
+    .then(res => setCurrentUser(res))
+    .catch((err) => console.log(`Возникла ошибка: ${err}`));
     api.getInitialCards()
     .then((res) => {
       setCards(res);
     })
     .catch((err) => console.log(`Возникла ошибка: ${err}`));
-  }, []);
-
-  useEffect(() => {
-    api.getUserInfo()
-    .then(res => setCurrentUser(res))
-    .catch((err) => console.log(`Возникла ошибка: ${err}`));
-  }, []
+  }, [isLoggedIn]
   )
 
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -97,6 +170,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsInfoToolTipOpen(false);
     setSelectedCard(null);
   };
 
@@ -106,7 +180,7 @@ function App() {
     }
   };
 
-  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard;
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isInfoToolTipOpen || selectedCard;
 
   useEffect(() => {
     function closeByEscape(evt) {
@@ -167,8 +241,22 @@ function App() {
       <div className="page">
         <Header />
         <Switch>
+          <Route path="/sign-in">
+            <Login
+              onLogin={handleLogin}
+              isLoading={isLoading}
+            />
+          </Route>
+          <Route path="/sign-up">
+            <Register
+              onRegister={handleRegister}
+              isLoading={isLoading}
+            />
+          </Route>
           <ProtectedRoute
-            exact path="/"
+            exact
+            path="/"
+            isLoggedIn={isLoggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
@@ -179,14 +267,14 @@ function App() {
             onCardDelete={hadleCardDeleteClick}
             onShowLikedBy={handleCardLikeCounterClick}
           />
-          <Route path="/sign-in">
-            <Login />
-          </Route>
-          <Route path="/sign-up">
-            <Register />
-          </Route>
           </Switch>
-          <Footer />
+          {isLoggedIn && <Footer />}
+          <InfoTooltip
+            isOpen={isInfoToolTipOpen}
+            isSuccessful={isRegistrationSuccessful}
+            onClose={closeAllPopups}
+            onOverlay={handleOverlayClick}
+          />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
@@ -234,4 +322,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

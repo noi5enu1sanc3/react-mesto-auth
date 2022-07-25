@@ -34,8 +34,6 @@ class Api {
     .then((res) => this._getResponse(res));
   }
 
-
-
   uploadNewCard(data) {
     return fetch(`${this._baseUrl}${this._id}/cards`, {
       method: "POST",

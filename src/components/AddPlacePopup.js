@@ -4,7 +4,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function AddPlacePopup({ isOpen, onClose, onOverlay, onAddPlace, isLoading }) {
   const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation();
+    useFormAndValidation('.popup__input-form');
 
   useEffect(() => {
     if (isOpen) {

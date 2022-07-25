@@ -69,3 +69,6 @@
 @import url(./blocks/auth/__save-btn/auth__save-btn_disabled.css);
 @import url(./blocks/auth/__to-login-link/auth__to-login-link.css);
 @import url(./blocks/auth/__to-login-text/auth__to-login-text.css);
+@import url(./blocks/popup/__icon/popup__icon.css);
+@import url(./blocks/popup/__icon/_status/popup__icon_status_error.css);
+@import url(./blocks/popup/__icon/_status/popup__icon_status_success.css);
