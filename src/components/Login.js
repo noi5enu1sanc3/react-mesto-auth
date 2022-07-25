@@ -1,15 +1,13 @@
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Login({ isLoading, onLogin }) {
-  const { values, setValues, handleChange, errors, isValid, resetForm } =
+  const { values, handleChange, errors, isValid } =
     useFormAndValidation(".auth__input");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
     onLogin(values);
-    resetForm();
-    setValues({ password: "", email: "" });
   };
 
   return (
@@ -19,7 +17,7 @@ function Login({ isLoading, onLogin }) {
         className="auth__form"
         name="login"
         onSubmit={handleSubmit}
-        novalidate
+        noValidate
       >
         <input
           className="auth__input"
@@ -29,7 +27,7 @@ function Login({ isLoading, onLogin }) {
           value={values.email || ""}
           onChange={handleChange}
           required
-        ></input>
+        />
         <div className="auth__input-error-container">
           <span className="auth__input-error">{errors.email}</span>
         </div>
@@ -42,7 +40,7 @@ function Login({ isLoading, onLogin }) {
           value={values.password || ""}
           onChange={handleChange}
           required
-        ></input>
+        />
         <div className="auth__input-error-container">
           <span className="auth__input-error">{errors.password}</span>
         </div>

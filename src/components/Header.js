@@ -4,9 +4,9 @@ import { Route, Link } from "react-router-dom";
 function Header({ userEmail, onLogOut }) {
   return (
     <header className="header">
-      <input className="burger-menu" id="burger-menu" type="checkbox"></input>
-      <label for="burger-menu" className="burger-menu__elements">
-        <span className="burger-menu__element"></span>
+      <input className="burger-menu" id="burger-menu" type="checkbox" />
+      <label htmlFor="burger-menu" className="burger-menu__elements">
+        <span className="burger-menu__element" />
       </label>
       <img src={logo} alt="логотип проекта Место" className="header__logo" />
       <div className="header__link-container">

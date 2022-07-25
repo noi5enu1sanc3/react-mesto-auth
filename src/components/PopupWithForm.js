@@ -39,7 +39,7 @@ function PopupWithForm({
           type="button"
           className="popup__close-btn"
           onClick={onClose}
-        ></button>
+        />
       </div>
     </section>
   );

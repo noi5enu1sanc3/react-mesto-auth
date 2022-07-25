@@ -11,7 +11,7 @@ function InfoTooltip({ onClose, onOverlay, isOpen, isSuccessful }) {
               ? "popup__icon_status_success"
               : "popup__icon_status_error"
           }`}
-        ></div>
+        />
         <h2 className="popup__heading popup__heading_style_centered">
           {isSuccessful
             ? "Вы успешно зарегистрировались!"
@@ -21,7 +21,7 @@ function InfoTooltip({ onClose, onOverlay, isOpen, isSuccessful }) {
           type="button"
           className="popup__close-btn"
           onClick={onClose}
-        ></button>
+        />
       </div>
     </section>
   );

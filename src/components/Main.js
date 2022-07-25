@@ -18,7 +18,7 @@ function Main({
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-wrapper">
-          <div className="profile__avatar-overlay" onClick={onEditAvatar}></div>
+          <div className="profile__avatar-overlay" onClick={onEditAvatar} />
           <img
             alt="аватар пользователя"
             className="profile__avatar"
@@ -35,7 +35,7 @@ function Main({
               aria-label="Редактировать профиль"
               className="profile__edit-btn"
               onClick={onEditProfile}
-            ></button>
+            />
           </div>
           <p className="profile__userinfo">{user !== null ? user.about : ""}</p>
         </div>
@@ -44,7 +44,7 @@ function Main({
           aria-label="Загрузить фото"
           className="profile__add-btn"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <section className="cards">
         <ul className="cards__items">

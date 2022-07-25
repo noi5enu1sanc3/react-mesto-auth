@@ -29,7 +29,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
+  const [isSuccessful, setIsSuccessful] =
     useState(false);
   const [userEmail, setUserEmail] = useState("");
 
@@ -68,12 +68,12 @@ function App() {
       .register({ password, email })
       .then(() => {
         history.push("./sign-in");
-        setIsRegistrationSuccessful(true);
+        setIsSuccessful(true);
         setIsInfoToolTipOpen(true);
       })
       .catch((err) => {
         console.log(err);
-        setIsRegistrationSuccessful(false);
+        setIsSuccessful(false);
         setIsInfoToolTipOpen(true);
       })
       .finally(() => setIsLoading(false));
@@ -100,7 +100,11 @@ function App() {
           history.push("./");
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err);
+        setIsSuccessful(false);
+        setIsInfoToolTipOpen(true);
+      })
       .finally(() => setIsLoading(false));
   };
 
@@ -281,7 +285,7 @@ function App() {
         {isLoggedIn && <Footer />}
         <InfoTooltip
           isOpen={isInfoToolTipOpen}
-          isSuccessful={isRegistrationSuccessful}
+          isSuccessful={isSuccessful}
           onClose={closeAllPopups}
           onOverlay={handleOverlayClick}
         />

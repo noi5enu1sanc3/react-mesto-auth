@@ -13,7 +13,7 @@ function ImagePopup({ name, link, isOpen, onClose, onOverlay }) {
           type="button"
           className="popup__close-btn"
           onClick={onClose}
-        ></button>
+        />
       </div>
     </section>
   );

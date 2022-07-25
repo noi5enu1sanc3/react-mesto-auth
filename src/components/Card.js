@@ -39,7 +39,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onShowLikedBy }) {
         className={cardDeleteButtonClassName}
         aria-label="Удалить"
         onClick={handleDeleteClick}
-      ></button>
+      />
       <img
         alt={card.name}
         className="cards__image"
@@ -54,7 +54,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, onShowLikedBy }) {
             className={cardLikeButtonClassName}
             aria-label="Нравится"
             {...likeButtonHandlers}
-          ></button>
+          />
           <p className="cards__like-count" onClick={handleLikeCounterClick}>
             {card.likes.length}
           </p>

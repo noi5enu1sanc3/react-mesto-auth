@@ -26,7 +26,7 @@ function ConfirmationPopup({
       cardId={cardId}
       isLoading={isLoading}
       isButtonEnabled={true}
-    ></PopupWithForm>
+    />
   );
 }
 
