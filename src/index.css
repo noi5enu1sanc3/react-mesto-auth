@@ -79,6 +79,5 @@
 @import url(./blocks/popup/__icon/_status/popup__icon_status_success.css);
 
 @import url(./blocks/burger-menu/burger-menu.css);
-@import url(./blocks/burger-menu/__toggle/burger-menu__toggle.css);
 @import url(./blocks/burger-menu/__elements/burger-menu__elements.css);
 @import url(./blocks/burger-menu/__element/burger-menu__element.css);

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function AddPlacePopup({ isOpen, onClose, onOverlay, onAddPlace, isLoading }) {
   const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation('.popup__input-form');
+    useFormAndValidation(".popup__input-form");
 
   useEffect(() => {
     if (isOpen) {
@@ -31,7 +31,7 @@ function AddPlacePopup({ isOpen, onClose, onOverlay, onAddPlace, isLoading }) {
     >
       <input
         onChange={handleChange}
-        value={values.name || ''}
+        value={values.name || ""}
         name="name"
         id="cardName-input"
         type="text"
@@ -48,7 +48,7 @@ function AddPlacePopup({ isOpen, onClose, onOverlay, onAddPlace, isLoading }) {
       </div>
       <input
         onChange={handleChange}
-        value={values.link || ''} 
+        value={values.link || ""}
         name="link"
         id="cardLink-input"
         type="url"

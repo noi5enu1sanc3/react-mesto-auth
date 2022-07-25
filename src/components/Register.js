@@ -1,10 +1,9 @@
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
-import InfoTooltip from "./InfoTooltip";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function Register({ isLoading, isSuccessful, onRegister,isOpen }) {
+function Register({ isLoading, onRegister }) {
   const { values, setValues, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation('.auth__input');
+    useFormAndValidation(".auth__input");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -12,13 +11,18 @@ function Register({ isLoading, isSuccessful, onRegister,isOpen }) {
     onRegister(values);
     resetForm();
     setValues({});
-  }
+  };
 
   return (
     <>
       <div className="auth__container">
         <h2 className="auth__heading">Регистрация</h2>
-        <form className="auth__form" name="register" onSubmit={handleSubmit} noValidate>
+        <form
+          className="auth__form"
+          name="register"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <input
             className="auth__input"
             placeholder="Email"
@@ -55,7 +59,10 @@ function Register({ isLoading, isSuccessful, onRegister,isOpen }) {
           </button>
         </form>
         <p className="auth__to-login-text">
-          Уже зарегистрированы? <Link to="sign-in" className="auth__to-login-link">Войти</Link>
+          Уже зарегистрированы?{" "}
+          <Link to="sign-in" className="auth__to-login-link">
+            Войти
+          </Link>
         </p>
       </div>
     </>

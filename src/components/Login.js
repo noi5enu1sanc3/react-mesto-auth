@@ -1,23 +1,26 @@
-import { useState } from "react";
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
-
 
 function Login({ isLoading, onLogin }) {
   const { values, setValues, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation('.auth__input');
+    useFormAndValidation(".auth__input");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
     onLogin(values);
     resetForm();
-    setValues({password: "", email: ""});
-  }
+    setValues({ password: "", email: "" });
+  };
 
   return (
     <div className="auth__container">
       <h2 className="auth__heading">Вход</h2>
-      <form className="auth__form" name="login" onSubmit={handleSubmit} novalidate>
+      <form
+        className="auth__form"
+        name="login"
+        onSubmit={handleSubmit}
+        novalidate
+      >
         <input
           className="auth__input"
           placeholder="Email"
