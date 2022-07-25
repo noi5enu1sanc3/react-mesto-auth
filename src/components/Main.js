@@ -10,7 +10,7 @@ function Main({
   cards,
   onCardLike,
   onCardDelete,
-  onShowLikedBy
+  onShowLikedBy,
 }) {
   const user = useContext(CurrentUserContext);
 

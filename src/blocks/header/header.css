@@ -2,12 +2,17 @@
   margin: 0 auto;
   padding-bottom: 41px;
   box-sizing: border-box;
+  width: 100%;
   max-width: 880px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .header {
     padding-bottom: 32px;
+    flex-wrap: wrap;
   }
 }

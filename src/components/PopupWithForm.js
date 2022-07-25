@@ -7,11 +7,13 @@ function PopupWithForm({
   onSubmit,
   children,
   buttonContent,
-  isButtonEnabled
+  isButtonEnabled,
 }) {
   return (
     <section
-      className={`popup popup_role_${name} ${isOpen ? "popup_status_show" : ''}`}
+      className={`popup popup_role_${name} ${
+        isOpen ? "popup_status_show" : ""
+      }`}
       onClick={onOverlay}
     >
       <div className="popup__container">
@@ -23,7 +25,13 @@ function PopupWithForm({
           noValidate
         >
           {children}
-          <button type="submit" className={`popup__save-btn ${isButtonEnabled ? "" : "popup__save-btn_disabled"}`} disabled={!isButtonEnabled}>
+          <button
+            type="submit"
+            className={`popup__save-btn ${
+              isButtonEnabled ? "" : "popup__save-btn_disabled"
+            }`}
+            disabled={!isButtonEnabled}
+          >
             {buttonContent}
           </button>
         </form>

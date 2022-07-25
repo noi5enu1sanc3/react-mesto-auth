@@ -9,29 +9,29 @@ export default function useLongPress({ onLongPress, onClick }) {
   function clear() {
     isLongPress.current = false;
     clearTimeout(timerRef.current);
-    setAction('');
+    setAction("");
   }
 
   function startPressTimer() {
     clear();
     timerRef.current = setTimeout(() => {
       isLongPress.current = true;
-      setAction('longpress');
-      console.log('looong press');
-      if (typeof onLongPress === 'function') {
+      setAction("longpress");
+      console.log("looong press");
+      if (typeof onLongPress === "function") {
         onLongPress();
       }
-    }, 500)
+    }, 500);
   }
 
   function handleOnClick(e) {
-    if ( isLongPress.current ) {
+    if (isLongPress.current) {
       return;
     }
-    setAction('click');
-    if (typeof onClick === 'function') {
-      console.log("like clicked!")
-      onClick()
+    setAction("click");
+    if (typeof onClick === "function") {
+      console.log("like clicked!");
+      onClick();
     }
   }
 
@@ -49,7 +49,7 @@ export default function useLongPress({ onLongPress, onClick }) {
   }
 
   function handleOnTouchEnd() {
-    if ( action === 'longpress' ) return;
+    if (action === "longpress") return;
     clear();
   }
 
@@ -60,7 +60,7 @@ export default function useLongPress({ onLongPress, onClick }) {
       onMouseDown: handleOnMouseDown,
       onMouseUp: handleOnMouseUp,
       onTouchStart: handleOnTouchStart,
-      onTouchEnd: handleOnTouchEnd
-    }
-  }
+      onTouchEnd: handleOnTouchEnd,
+    },
+  };
 }
