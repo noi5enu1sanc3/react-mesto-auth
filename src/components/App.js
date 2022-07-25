@@ -73,6 +73,12 @@ function App() {
     .finally(() => setIsLoading(false))
   }
 
+  const handleLogout = () => {
+    console.log('to logout');
+    localStorage.removeItem('token');
+    history.push('/sign-in');
+  }
+
   const handleTokenCheck = () => {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
@@ -239,7 +245,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header userEmail={userEmail} onLogOut={handleLogout}/>
         <Switch>
           <Route path="/sign-in">
             <Login
