@@ -20,7 +20,7 @@ function PopupWithForm({
         <h2 className="popup__heading">{title}</h2>
         <form
           name={name}
-          className="popup__form"
+          className="popup__form js-form"
           onSubmit={onSubmit}
           noValidate
         >

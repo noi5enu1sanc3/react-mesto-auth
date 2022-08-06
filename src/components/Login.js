@@ -1,8 +1,7 @@
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Login({ isLoading, onLogin }) {
-  const { values, handleChange, errors, isValid } =
-    useFormAndValidation(".auth__form");
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -14,7 +13,7 @@ function Login({ isLoading, onLogin }) {
     <div className="auth__container">
       <h2 className="auth__heading">Вход</h2>
       <form
-        className="auth__form"
+        className="auth__form js-form"
         name="login"
         onSubmit={handleSubmit}
         noValidate
