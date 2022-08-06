@@ -29,8 +29,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isSuccessful, setIsSuccessful] =
-    useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const [userEmail, setUserEmail] = useState("");
 
   const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false);

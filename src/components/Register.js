@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Register({ isLoading, onRegister }) {
   const { values, handleChange, errors, isValid } =
-    useFormAndValidation(".auth__input");
+    useFormAndValidation(".auth__form");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

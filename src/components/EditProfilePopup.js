@@ -13,7 +13,7 @@ function EditProfilePopup({
   const currentUser = useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, setValues, resetForm } =
-    useFormAndValidation(".popup__input-form");
+    useFormAndValidation(".popup__form");
 
   useEffect(() => {
     if (currentUser !== null && isOpen) {
@@ -24,7 +24,6 @@ function EditProfilePopup({
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
     onUpdateUser(values);
   }
 

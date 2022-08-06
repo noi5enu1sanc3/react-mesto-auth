@@ -35,11 +35,7 @@ function PopupWithForm({
             {buttonContent}
           </button>
         </form>
-        <button
-          type="button"
-          className="popup__close-btn"
-          onClick={onClose}
-        />
+        <button type="button" className="popup__close-btn" onClick={onClose} />
       </div>
     </section>
   );

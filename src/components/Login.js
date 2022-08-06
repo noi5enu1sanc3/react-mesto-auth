@@ -2,7 +2,7 @@ import { useFormAndValidation } from "../hooks/useFormAndValidation";
 
 function Login({ isLoading, onLogin }) {
   const { values, handleChange, errors, isValid } =
-    useFormAndValidation(".auth__input");
+    useFormAndValidation(".auth__form");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
