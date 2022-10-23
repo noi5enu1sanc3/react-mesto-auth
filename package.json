@@ -1,7 +1,6 @@
 {
   "name": "mesto",
   "version": "0.1.0",
-  "homepage": "https://noi5enu1sanc3.github.io/react-mesto-auth",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
